@@ -1,0 +1,607 @@
+/* ==========================================================================
+   Escape The Crowd - Section Styles
+   ========================================================================== */
+
+/* ==========================================
+   1. Header & Navigation
+   ========================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  padding: 1rem 0;
+  transition: all var(--transition-normal);
+  background: rgba(10, 10, 13, 0.4);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.navbar.scrolled {
+  padding: 0.75rem 0;
+  background: rgba(10, 10, 13, 0.92);
+  border-bottom: 1px solid var(--gold-border-subtle);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-serif);
+  font-size: 1.18rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #fff;
+}
+
+.brand-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--gold-primary);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+  position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--gold-light);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold-primary);
+  transition: width var(--transition-fast);
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+  width: 100%;
+}
+
+.nav-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ==========================================
+   2. Hero Section
+   ========================================== */
+.hero-section {
+  padding: 8.5rem 0 5rem 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-full);
+  color: var(--gold-light);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title {
+  margin-bottom: 1.25rem;
+  line-height: 1.18;
+}
+
+.hero-description {
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 580px;
+}
+
+.hero-price-box {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: rgba(21, 21, 28, 0.6);
+  border: 1px solid var(--gold-border);
+  padding: 0.85rem 1.4rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 2rem;
+  width: fit-content;
+  backdrop-filter: blur(10px);
+}
+
+.price-current {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--gold-light);
+  font-family: var(--font-serif);
+}
+
+.price-original {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.price-offer-label {
+  font-size: 0.78rem;
+  color: var(--gold-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.hero-trust-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1.5rem;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.trust-icon {
+  color: var(--gold-primary);
+  font-size: 1.1rem;
+}
+
+/* ==========================================
+   3. "The Trap vs The Escape" (Problem vs Solution)
+   ========================================== */
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.comparison-card {
+  padding: 2.5rem;
+  border-radius: var(--radius-lg);
+  position: relative;
+}
+
+.comparison-card.trap {
+  background: rgba(220, 38, 38, 0.04);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.comparison-card.escape {
+  background: rgba(212, 175, 55, 0.06);
+  border: 1px solid var(--gold-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(212, 175, 55, 0.1);
+}
+
+.comparison-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.25rem;
+}
+
+.trap .comparison-card-badge {
+  background: rgba(220, 38, 38, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+}
+
+.escape .comparison-card-badge {
+  background: var(--bg-glass-gold);
+  color: var(--gold-light);
+  border: 1px solid var(--gold-border);
+}
+
+.comparison-list {
+  list-style: none;
+  margin-top: 1.5rem;
+}
+
+.comparison-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.comparison-icon {
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  font-size: 1.1rem;
+}
+
+.trap .comparison-icon {
+  color: #ef4444;
+}
+
+.escape .comparison-icon {
+  color: var(--gold-primary);
+}
+
+/* ==========================================
+   4. 6-Part & 19-Chapter Explorer
+   ========================================== */
+.chapters-nav-tabs {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  margin-bottom: 2.5rem;
+  scrollbar-width: none;
+}
+
+.chapters-nav-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.chapter-tab-btn {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  padding: 0.85rem 1.4rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.chapter-tab-btn span.tab-part {
+  font-size: 0.72rem;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.chapter-tab-btn:hover {
+  border-color: var(--gold-border);
+  color: #fff;
+  background: var(--bg-card-hover);
+}
+
+.chapter-tab-btn.active {
+  background: var(--bg-card-hover);
+  border-color: var(--gold-primary);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+.chapter-pane {
+  display: none;
+}
+
+.chapter-pane.active {
+  display: block;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chapters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.chapter-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chapter-card:hover {
+  border-color: var(--gold-border);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.chapter-number {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--gold-primary);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.chapter-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.6rem;
+  color: #fff;
+}
+
+.chapter-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 1.2rem;
+}
+
+.chapter-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 1rem;
+  margin-top: auto;
+}
+
+/* ==========================================
+   5. Quotes Carousel / Grid
+   ========================================== */
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* ==========================================
+   6. Meet The Author: Abhishek Sharma
+   ========================================== */
+.author-card {
+  background: var(--bg-card);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 3rem;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.1);
+}
+
+.author-image-box {
+  text-align: center;
+}
+
+.author-avatar-frame {
+  width: 210px;
+  height: 210px;
+  margin: 0 auto 0.75rem auto;
+  border-radius: 50%;
+  padding: 4px;
+  background: var(--gold-gradient);
+  box-shadow: var(--gold-glow);
+}
+
+.author-avatar-frame img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 20%;
+  border: 3px solid #0d0d10;
+}
+
+.author-avatar-name {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin: 0.5rem 0 0.25rem 0;
+}
+
+.author-badge-hashtag {
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--gold-light);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  display: inline-block;
+}
+
+.author-bio h3 {
+  font-size: 2rem;
+  margin-bottom: 0.35rem;
+}
+
+.author-title-tag {
+  color: var(--gold-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  display: block;
+}
+
+.author-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.author-email-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.author-email-link:hover {
+  color: var(--gold-light);
+}
+
+/* ==========================================
+   7. Pricing & Final CTA Box
+   ========================================== */
+.pricing-box {
+  background: linear-gradient(145deg, #161620 0%, #0d0d12 100%);
+  border: 2px solid var(--gold-primary);
+  border-radius: var(--radius-lg);
+  padding: 3.5rem;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), var(--gold-glow);
+}
+
+.pricing-badge-popular {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold-gradient);
+  color: #000;
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.15em;
+  padding: 0.35rem 1.25rem;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+}
+
+.pricing-amount {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--gold-light);
+  line-height: 1;
+  margin: 1.25rem 0 0.5rem 0;
+}
+
+.pricing-features-list {
+  list-style: none;
+  text-align: left;
+  max-width: 480px;
+  margin: 2rem auto;
+}
+
+.pricing-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+}
+
+.pricing-check-icon {
+  color: var(--gold-primary);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+/* ==========================================
+   8. Footer
+   ========================================== */
+.footer {
+  background: #060608;
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  padding: 4rem 0 2rem 0;
+  margin-top: 4rem;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 2rem;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}

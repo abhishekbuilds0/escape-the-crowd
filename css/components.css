@@ -1,0 +1,1087 @@
+/* ==========================================================================
+   Escape The Crowd - Component Styles
+   ========================================================================== */
+
+/* ==========================================
+   1. Buttons
+   ========================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.85rem;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+  line-height: 1.2;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-lg {
+  padding: 1.05rem 2.25rem;
+  font-size: 1.1rem;
+  border-radius: var(--radius-md);
+}
+
+.btn-sm {
+  padding: 0.55rem 1.15rem;
+  font-size: 0.88rem;
+  border-radius: var(--radius-sm);
+}
+
+.btn-primary {
+  background: var(--gold-gradient);
+  color: var(--text-dark);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--gold-glow-intense);
+  color: #000;
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-primary);
+  border: 1px solid var(--gold-border);
+  backdrop-filter: blur(10px);
+}
+
+.btn-ghost:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--gold-primary);
+  color: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+.btn-pulse {
+  animation: pulseGlow 2.5s infinite;
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
+  70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+}
+
+/* ==========================================
+   2. Badges & Micro Tags
+   ========================================== */
+.live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.8rem;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--radius-full);
+  color: #34d399;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #10b981;
+  border-radius: 50%;
+  animation: dotPulse 1.8s infinite;
+}
+
+@keyframes dotPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.discount-tag {
+  background: #dc2626;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================
+   3. Cards & Glassmorphism Surfaces
+   ========================================== */
+.card-glass {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+  position: relative;
+  transition: all var(--transition-normal);
+  overflow: hidden;
+}
+
+.card-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+  opacity: 0.4;
+  transition: opacity var(--transition-normal);
+}
+
+.card-glass:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold-border);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.1);
+}
+
+.card-glass:hover::before {
+  opacity: 1;
+}
+
+/* ==========================================
+   4. Realistic 3D Book Mockup
+   ========================================== */
+.book-showcase-container {
+  perspective: 1400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.book-3d-wrap {
+  width: 320px;
+  height: 480px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(-22deg) rotateX(10deg);
+  transition: transform 0.15s ease-out;
+  cursor: grab;
+}
+
+.book-3d-wrap:active {
+  cursor: grabbing;
+}
+
+/* Front Cover */
+.book-cover-front {
+  position: absolute;
+  inset: 0;
+  background: #0d0d10;
+  border-radius: 4px 10px 10px 4px;
+  box-shadow: var(--shadow-book);
+  transform: translateZ(16px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.8rem 1.4rem;
+  text-align: center;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  user-select: none;
+}
+
+/* Double Gold Border (Book Cover Signature Design) */
+.book-cover-inner-frame {
+  position: absolute;
+  inset: 10px;
+  border: 1px solid var(--gold-primary);
+  pointer-events: none;
+  border-radius: 2px 6px 6px 2px;
+}
+
+.book-cover-inner-frame::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 1px 4px 4px 1px;
+}
+
+.book-cover-header {
+  position: relative;
+  z-index: 2;
+  margin-top: 0.5rem;
+}
+
+.book-top-tag {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.32em;
+  color: var(--gold-light);
+  text-transform: uppercase;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.book-title-main {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  line-height: 1.1;
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+.book-subtitle {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 0.78rem;
+  color: var(--gold-light);
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+}
+
+/* Author Portrait in Cover */
+.book-author-portrait-wrap {
+  position: relative;
+  z-index: 2;
+  margin: 0.8rem auto;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  padding: 3px;
+  background: var(--gold-gradient);
+  box-shadow: 0 4px 18px rgba(0,0,0,0.8), 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.book-author-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 20%;
+  background: #1a1a24;
+  border: 2px solid #0d0d10;
+}
+
+.book-cover-footer {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 0.4rem;
+}
+
+.book-author-name {
+  font-family: var(--font-serif);
+  font-size: 0.88rem;
+  letter-spacing: 0.22em;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.book-author-tagline {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  color: var(--gold-primary);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+/* Book Spine */
+.book-spine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 100%;
+  background: linear-gradient(90deg, #050508 0%, #15151b 50%, #0d0d10 100%);
+  transform: rotateY(-90deg) translateZ(16px);
+  transform-origin: left;
+  border-radius: 3px 0 0 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid var(--gold-border);
+}
+
+.book-spine-text {
+  transform: rotate(90deg);
+  font-family: var(--font-serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  color: var(--gold-light);
+  white-space: nowrap;
+  font-weight: 700;
+}
+
+/* Book Page Edges */
+.book-pages-side {
+  position: absolute;
+  top: 6px;
+  right: 0;
+  width: 28px;
+  height: calc(100% - 12px);
+  background: repeating-linear-gradient(
+    90deg,
+    #e8e4d9 0px,
+    #cfc9b8 1px,
+    #f2eee4 2px
+  );
+  transform: rotateY(90deg) translateZ(304px);
+  transform-origin: right;
+  border-radius: 0 4px 4px 0;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Dynamic Gloss Highlight Effect */
+.book-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0.2) 48%,
+    transparent 55%
+  );
+  pointer-events: none;
+  opacity: 0.7;
+  mix-blend-mode: overlay;
+  z-index: 5;
+}
+
+/* ==========================================
+   5. Quotes & Highlights
+   ========================================== */
+.quote-card {
+  background: var(--bg-card);
+  border-left: 3px solid var(--gold-primary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 1.5rem 1.8rem;
+  position: relative;
+  margin: 1.5rem 0;
+  background-image: linear-gradient(90deg, rgba(212, 175, 55, 0.05) 0%, transparent 100%);
+}
+
+.quote-card p {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-size: 1.18rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.quote-author {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  color: var(--gold-light);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================
+   6. Accordions
+   ========================================== */
+.accordion-item {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: border-color var(--transition-fast);
+}
+
+.accordion-item.active {
+  border-color: var(--gold-border);
+}
+
+.accordion-header {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  background: transparent;
+  transition: background var(--transition-fast);
+}
+
+.accordion-header:hover {
+  background: rgba(212, 175, 55, 0.03);
+}
+
+.accordion-title {
+  font-family: var(--font-sans);
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.accordion-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--gold-primary);
+  transition: transform var(--transition-normal);
+}
+
+.accordion-item.active .accordion-icon {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-normal) ease-out, padding var(--transition-normal);
+  padding: 0 1.5rem;
+}
+
+.accordion-item.active .accordion-content {
+  max-height: 500px;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+/* ==========================================
+   7. Modals
+   ========================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 4, 6, 0.88);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-box {
+  background: #111116;
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 680px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 175, 55, 0.15);
+  transform: translateY(25px) scale(0.96);
+  transition: transform var(--transition-normal);
+  padding: 2.5rem;
+}
+
+.modal-overlay.active .modal-box {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--gold-light);
+  transform: rotate(90deg);
+}
+
+/* Sample Reader Book Page Styling Inside Modal */
+.reader-page {
+  background: #fdfaf4;
+  color: #1a1a1f;
+  padding: 2.5rem 2.2rem;
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.08), 0 8px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.reader-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 18px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.1) 0%, transparent 100%);
+}
+
+.reader-chapter-tag {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  color: #7a621d;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.reader-title {
+  font-family: Georgia, serif;
+  font-size: 1.85rem;
+  color: #0d0d12;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+.reader-subtitle {
+  font-style: italic;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1.8rem;
+  border-bottom: 1px solid #d4af37;
+  padding-bottom: 0.8rem;
+}
+
+.reader-text {
+  color: #2b2b30;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  margin-bottom: 1.2rem;
+}
+
+.reader-quote-box {
+  background: #f4ecdc;
+  border-left: 3px solid #b89025;
+  padding: 1.1rem 1.4rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #111;
+  font-size: 1.1rem;
+}
+
+.reader-reflect-box {
+  background: #fff8eb;
+  border: 1px solid #e5c983;
+  padding: 1.25rem 1.4rem;
+  border-radius: 4px;
+  margin-top: 1.8rem;
+}
+
+.reader-reflect-tag {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #946f14;
+  letter-spacing: 0.2em;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+}
+
+/* ==========================================
+   8. Live Activity Toast
+   ========================================== */
+.toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 990;
+  pointer-events: none;
+}
+
+.toast-item {
+  background: #15151d;
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7), 0 0 15px rgba(212, 175, 55, 0.15);
+  backdrop-filter: blur(10px);
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+  max-width: 340px;
+}
+
+.toast-item.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.toast-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--gold-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.toast-content {
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  line-height: 1.35;
+}
+
+.toast-time {
+  font-size: 0.72rem;
+  color: var(--gold-light);
+  display: block;
+  margin-top: 0.2rem;
+}
+
+/* ==========================================
+   10. Audio Voiceover Preview Player
+   ========================================== */
+.audio-preview-card {
+  background: rgba(18, 18, 24, 0.85);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(212, 175, 55, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.audio-play-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gold-gradient);
+  border: none;
+  color: #0a0a0d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+.audio-play-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 22px rgba(212, 175, 55, 0.7);
+}
+
+.audio-info {
+  flex: 1;
+}
+
+.audio-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.45rem;
+}
+
+.audio-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.audio-time {
+  font-size: 0.78rem;
+  color: var(--gold-light);
+  font-family: var(--font-mono);
+}
+
+.audio-progress-bg {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.audio-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--gold-gradient);
+  transition: width 0.3s linear;
+}
+
+.audio-equalizer {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 16px;
+}
+
+.audio-wave-bar {
+  width: 3px;
+  height: 6px;
+  background: var(--gold-primary);
+  border-radius: 2px;
+  transition: height 0.2s ease;
+}
+
+.audio-wave-bar.animating:nth-child(1) { animation: soundWave 0.8s infinite ease-in-out alternate; }
+.audio-wave-bar.animating:nth-child(2) { animation: soundWave 0.6s infinite ease-in-out alternate 0.2s; }
+.audio-wave-bar.animating:nth-child(3) { animation: soundWave 0.9s infinite ease-in-out alternate 0.4s; }
+.audio-wave-bar.animating:nth-child(4) { animation: soundWave 0.5s infinite ease-in-out alternate 0.1s; }
+
+@keyframes soundWave {
+  0% { height: 4px; }
+  100% { height: 16px; }
+}
+
+/* WhatsApp 1-Tap Order Button */
+.btn-whatsapp {
+  background: #25d366;
+  color: #fff !important;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.4rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.btn-whatsapp:hover {
+  background: #20ba5a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+}
+
+/* Social Icon Badges */
+.social-links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.95rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.social-pill:hover {
+  background: var(--gold-primary);
+  color: #0a0a0d;
+  border-color: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
+}
+
+/* ==========================================================================
+   Dynamic Feature 1 & 4: Top Urgency Announcement Bar & Live Visitor Ticker
+   ========================================================================== */
+.top-urgency-bar {
+  background: linear-gradient(90deg, #120e03, #2a1f06, #120e03);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+  color: #f3e5ab;
+  font-size: 0.86rem;
+  padding: 0.6rem 1rem;
+  text-align: center;
+  position: relative;
+  z-index: 1001;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.top-urgency-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.urgency-pill {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.urgency-badge {
+  background: #d4af37;
+  color: #0a0a0d;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 800;
+  display: inline-block;
+}
+
+.pulse-highlight {
+  animation: pulseGold 0.6s ease;
+}
+
+@keyframes pulseGold {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); filter: brightness(1.4); }
+  100% { transform: scale(1); }
+}
+
+.timer-badge {
+  font-family: monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.live-visitor-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #86efac;
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.live-dot-glow {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #22c55e;
+  animation: liveBlink 1.5s infinite;
+}
+
+@keyframes liveBlink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* ==========================================================================
+   Dynamic Feature 2: Interactive 30-Second Crowd Mindset Quiz
+   ========================================================================== */
+.quiz-section {
+  padding: 6rem 0;
+  position: relative;
+  background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+}
+
+.quiz-card {
+  max-width: 760px;
+  margin: 0 auto;
+  background: linear-gradient(145deg, rgba(21, 21, 28, 0.95), rgba(15, 15, 20, 0.98));
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(212, 175, 55, 0.1);
+  position: relative;
+}
+
+.quiz-progress-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  width: 33%;
+  background: linear-gradient(90deg, #d4af37, #f3e5ab);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.quiz-question-number {
+  font-size: 0.85rem;
+  color: var(--gold-light);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-question-text {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  color: #fff;
+  line-height: 1.45;
+  margin-bottom: 1.8rem;
+}
+
+.quiz-options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.quiz-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  color: #e5e5eb;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: 100%;
+}
+
+.quiz-option-btn:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--gold-primary);
+  transform: translateX(4px);
+  color: #fff;
+}
+
+.quiz-option-letter {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid var(--gold-border);
+  color: var(--gold-light);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+}
+
+.quiz-option-text {
+  flex: 1;
+  line-height: 1.45;
+}
+
+/* Quiz Result View */
+.quiz-result-view {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.quiz-score-badge {
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: 900;
+  font-family: var(--font-serif);
+  color: var(--gold-light);
+  margin-bottom: 0.5rem;
+}
+
+.quiz-score-track {
+  width: 100%;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 1.2rem auto 2rem auto;
+  max-width: 500px;
+}
+
+.quiz-score-bar {
+  height: 100%;
+  width: 0%;
+  transition: width 1s ease-out;
+  border-radius: 6px;
+}
+
+.quiz-diagnosis-box {
+  background: rgba(212, 175, 55, 0.06);
+  border: 1px dashed var(--gold-border);
+  border-radius: var(--radius-md);
+  padding: 1.8rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+/* Pricing Stock Bar */
+.pricing-stock-tracker {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.stock-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 0.6rem;
+}
+
+.stock-bar {
+  height: 100%;
+  width: 86%;
+  background: linear-gradient(90deg, #d4af37, #ef4444);
+  border-radius: 4px;
+  transition: width 0.8s ease;
+}
+

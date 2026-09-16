@@ -1,0 +1,64 @@
+/* ==========================================================================
+   Escape The Crowd - Design Tokens & Variables
+   Theme: Luxury Matte Obsidian Black & Champagne Gold
+   ========================================================================== */
+
+:root {
+  /* Color Palette - Backgrounds */
+  --bg-primary: #0a0a0d;
+  --bg-secondary: #111116;
+  --bg-card: #15151c;
+  --bg-card-hover: #1c1c24;
+  --bg-glass: rgba(21, 21, 28, 0.75);
+  --bg-glass-gold: rgba(212, 175, 55, 0.04);
+  --bg-input: #121217;
+
+  /* Color Palette - Gold Accents (Matched to Book Cover) */
+  --gold-primary: #d4af37;
+  --gold-light: #f5e7a9;
+  --gold-dark: #aa841c;
+  --gold-gradient: linear-gradient(135deg, #f5e7a9 0%, #d4af37 50%, #aa841c 100%);
+  --gold-gradient-subtle: linear-gradient(135deg, rgba(245, 231, 169, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+  --gold-glow: 0 0 30px rgba(212, 175, 55, 0.28);
+  --gold-glow-intense: 0 0 45px rgba(212, 175, 55, 0.45);
+  --gold-border: rgba(212, 175, 55, 0.35);
+  --gold-border-subtle: rgba(212, 175, 55, 0.18);
+  --gold-border-bright: rgba(245, 231, 169, 0.65);
+
+  /* Color Palette - Text */
+  --text-primary: #f8f8fa;
+  --text-secondary: #d1cfc7;
+  --text-muted: #8e8e99;
+  --text-gold: #e5be49;
+  --text-dark: #0a0a0d;
+
+  /* Status Colors */
+  --color-success: #10b981;
+  --color-success-bg: rgba(16, 185, 129, 0.12);
+  --color-badge: #d4af37;
+
+  /* Typography */
+  --font-serif: 'Cinzel', 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Shadows & Depth */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.8);
+  --shadow-book: -12px 18px 45px rgba(0, 0, 0, 0.9), 0 0 35px rgba(212, 175, 55, 0.15);
+  --shadow-glow: 0 0 25px rgba(212, 175, 55, 0.2);
+
+  /* Spacing & Sizing */
+  --container-max: 1200px;
+  --container-narrow: 880px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}

@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Badhaai Ho! Aapka Order Confirm Hua — Escape The Crowd</title>
+  <meta name="description" content="Thank you for purchasing Escape The Crowd. Download your official eBook blueprint now.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <style>
+    /* Canvas Confetti Background */
+    #confettiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .welcome-page-wrapper {
+      min-height: 100vh;
+      background: radial-gradient(circle at 50% 15%, rgba(212, 175, 55, 0.12) 0%, #0a0a0d 65%);
+      padding: 3rem 1rem 5rem 1rem;
+      position: relative;
+    }
+
+    .welcome-container {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .success-header-card {
+      background: linear-gradient(145deg, rgba(21, 21, 28, 0.95), rgba(15, 15, 20, 0.98));
+      border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(212, 175, 55, 0.15);
+      margin-bottom: 2.5rem;
+    }
+
+    .success-icon-badge {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(34, 197, 94, 0.15);
+      border: 2px solid #22c55e;
+      color: #22c55e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 1.5rem auto;
+      box-shadow: 0 0 25px rgba(34, 197, 94, 0.35);
+      animation: bounceIn 0.8s ease;
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.3); opacity: 0; }
+      60% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    .welcome-headline {
+      font-family: var(--font-serif);
+      font-size: 2.3rem;
+      color: #ffffff;
+      margin-bottom: 0.8rem;
+    }
+
+    .welcome-sub {
+      color: var(--gold-light);
+      font-size: 1.15rem;
+      max-width: 600px;
+      margin: 0 auto 1.8rem auto;
+      line-height: 1.6;
+    }
+
+    .download-action-box {
+      background: rgba(212, 175, 55, 0.06);
+      border: 1px dashed var(--gold-border);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .download-status-text {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+    }
+
+    .btn-download-hero {
+      background: linear-gradient(135deg, #d4af37, #b8860b);
+      color: #0a0a0d;
+      font-weight: 800;
+      font-size: 1.15rem;
+      padding: 1.1rem 2.5rem;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-download-hero:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(212, 175, 55, 0.6);
+      color: #000;
+    }
+
+    /* Order Receipt Card */
+    .receipt-card {
+      background: rgba(18, 18, 24, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .receipt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .receipt-title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: #fff;
+    }
+
+    .receipt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .receipt-item label {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .receipt-item span {
+      font-size: 0.98rem;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* Reading Guide Cards */
+    .guide-section-title {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .guide-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .guide-card {
+      background: rgba(21, 21, 28, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .guide-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold-border);
+    }
+
+    .guide-card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .guide-card h4 {
+      font-size: 1.1rem;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .guide-card p {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* VIP & Support Action Group */
+    .support-card {
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.08), rgba(21, 21, 28, 0.95));
+      border: 1px solid rgba(37, 211, 102, 0.3);
+      border-radius: var(--radius-md);
+      padding: 1.8rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .support-btn-wa {
+      background: #25d366;
+      color: #fff;
+      font-weight: 700;
+      padding: 0.85rem 1.8rem;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-size: 0.98rem;
+      margin-top: 1rem;
+      transition: background 0.2s ease;
+    }
+
+    .support-btn-wa:hover {
+      background: #1eb956;
+      color: #fff;
+    }
+
+    .footer-links {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .footer-links a {
+      color: var(--gold-light);
+      text-decoration: none;
+      margin: 0 1rem;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <div class="welcome-page-wrapper">
+    <div class="welcome-container">
+
+      <!-- Brand Logo Header -->
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <a href="index.html" class="brand-logo" style="display: inline-flex; justify-content: center; gap: 8px; text-decoration: none;">
+          <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <span style="font-family: var(--font-serif); font-size: 1.25rem; letter-spacing: 2px; color: #fff;">ESCAPE THE CROWD</span>
+        </a>
+      </div>
+
+      <!-- Main Celebration & Download Card -->
+      <div class="success-header-card">
+        <div class="success-icon-badge">✓</div>
+        <span class="live-pill" style="margin-bottom: 1rem;">🎉 Order Successfully Confirmed</span>
+        
+        <h1 class="welcome-headline">
+          Swagat Hai, <span id="welcomeBuyerName" style="color: var(--gold-light);">Reader</span>!
+        </h1>
+        
+        <p class="welcome-sub">
+          Aapne bheed se nikal kar apni life ki driving seat khud sambhalne ka pehla kadam utha liya hai. Aapka <strong>"Escape The Crowd" (19-Chapter Full Edition)</strong> access unlock ho chuka hai!
+        </p>
+
+        <!-- Primary Download Box -->
+        <div class="download-action-box">
+          <p class="download-status-text" id="downloadStatusText">
+            ⚡ <strong>Automatic Download:</strong> Aapki original eBook download shuru ho rahi hai... Agar download start nahi hui toh neeche button dabayein:
+          </p>
+          
+          <a href="assets/ebook/Escape_The_Crowd.pdf" target="_blank" download="Escape_The_Crowd_Abhishek_Sharma.pdf" class="btn-download-hero" id="heroDownloadBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download eBook PDF Now (Instant)
+          </a>
+
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem; margin-bottom: 0;">
+            📄 Format: High-Resolution Printable & Mobile-Friendly PDF · Lifetime Access
+          </p>
+        </div>
+
+        <!-- Share with friend button -->
+        <div>
+          <a id="shareWhatsAppBtn" href="#" target="_blank" class="btn btn-ghost btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.077-1.78-.4-.954-.395-1.571-.979-2.008-1.564-.437-.585-.806-1.442-.806-2.203 0-.76.394-1.135.534-1.28.14-.145.306-.182.408-.182s.204.004.294.008c.096.004.225-.036.35.267.126.303.431 1.05.469 1.127.038.077.064.167.013.27-.051.103-.077.167-.154.257-.077.09-.162.201-.231.27-.077.077-.157.16-.067.315.09.154.4 0.66 0.857 1.066.589.524 1.086.686 1.24.763.154.077.243.064.333-.038.09-.103.385-.449.487-.603.102-.154.205-.128.346-.077.141.051.897.423 1.051.5.154.077.256.115.294.18.038.064.038.372-.106.777z"></path>
+            </svg>
+            Apne Dost ko bhi recommend karein (Share on WhatsApp)
+          </a>
+        </div>
+      </div>
+
+      <!-- Order Receipt Details Card -->
+      <div class="receipt-card">
+        <div class="receipt-header">
+          <span class="receipt-title">🧾 Order Summary & Receipt</span>
+          <span style="color: #22c55e; font-weight: 700; font-size: 0.9rem; background: rgba(34, 197, 94, 0.1); padding: 4px 10px; border-radius: 4px;">
+            ● Payment Verified
+          </span>
+        </div>
+        <div class="receipt-grid">
+          <div class="receipt-item">
+            <label>Order ID</label>
+            <span id="receiptOrderId">ORD-89412</span>
+          </div>
+          <div class="receipt-item">
+            <label>Customer Name</label>
+            <span id="receiptCustomerName">Abhishek</span>
+          </div>
+          <div class="receipt-item">
+            <label>Amount Paid</label>
+            <span style="color: var(--gold-light);">₹99.00 (Flat 80% Off)</span>
+          </div>
+          <div class="receipt-item">
+            <label>Item</label>
+            <span>Escape The Crowd (Full 19 Chapters)</span>
+          </div>
+          <div class="receipt-item">
+            <label>Delivery Status</label>
+            <span>Instant PDF Download Unlocked</span>
+          </div>
+          <div class="receipt-item">
+            <label>Date & Time</label>
+            <span id="receiptDateTime">Today</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- How to Read Quick Guide -->
+      <h3 class="guide-section-title">📱 Quick Reading Guide (Kaise Padhein?)</h3>
+      <div class="guide-cards-grid">
+        <div class="guide-card">
+          <div class="guide-card-icon">📱</div>
+          <h4>Phone / Tablet Par</h4>
+          <p>PDF download hone ke baad kisi bhi PDF viewer (Adobe Acrobat, Google Drive PDF ya Apple Books) mein open karein aur Dark/Night mode on karke padhein.</p>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-card-icon">💻</div>
+          <h4>Laptop / PC Par</h4>
+          <p>Browser ya PDF reader mein open karein. Daily sirf 15-20 minute nikaalein aur 1 chapter poora dhyan se bina distraction ke padhein.</p>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-card-icon">✍️</div>
+          <h4>The "Reflect" Rule</h4>
+          <p>Har chapter ke end mein <strong>Reflect Audit</strong> diya gaya hai. Un sawalon ko apni diary ya notebook mein zaroor likhein.</p>
+        </div>
+      </div>
+
+      <!-- VIP WhatsApp Support Card -->
+      <div class="support-card">
+        <h4 style="font-size: 1.3rem; color: #fff; margin-bottom: 0.5rem;">
+          Direct Author VIP Support (#AbhishekBuilds)
+        </h4>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; max-width: 550px; margin: 0 auto;">
+          Agar PDF download karne mein koi problem ho ya aapko koi sawal ho, toh seedhe mere WhatsApp par message karein. Main personally help karunga!
+        </p>
+        <a href="https://wa.me/?text=Hi%20Abhishek%2C%20I%20have%20purchased%20Escape%20The%20Crowd%20eBook%20and%20need%20assistance." target="_blank" class="support-btn-wa">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.077-1.78-.4-.954-.395-1.571-.979-2.008-1.564-.437-.585-.806-1.442-.806-2.203 0-.76.394-1.135.534-1.28.14-.145.306-.182.408-.182s.204.004.294.008c.096.004.225-.036.35.267.126.303.431 1.05.469 1.127.038.077.064.167.013.27-.051.103-.077.167-.154.257-.077.09-.162.201-.231.27-.077.077-.157.16-.067.315.09.154.4 0.66 0.857 1.066.589.524 1.086.686 1.24.763.154.077.243.064.333-.038.09-.103.385-.449.487-.603.102-.154.205-.128.346-.077.141.051.897.423 1.051.5.154.077.256.115.294.18.038.064.038.372-.106.777z"></path>
+          </svg>
+          Author se WhatsApp Par Connect Karein
+        </a>
+      </div>
+
+      <!-- Navigation Footnotes -->
+      <div class="footer-links">
+        <a href="index.html">← Back to Main Website</a>
+        <span style="color: var(--text-muted);">|</span>
+        <a href="index.html#chapters">Explore 19 Chapters</a>
+        <span style="color: var(--text-muted);">|</span>
+        <a href="index.html#author">About Abhishek Sharma</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/pdf-generator.js"></script>
+  <script>
+    // 1. Extract Buyer info from URL or Session
+    const urlParams = new URLSearchParams(window.location.search);
+    let buyerName = urlParams.get('name') || sessionStorage.getItem('buyerName') || "Sovereign Reader";
+    let buyerEmail = urlParams.get('email') || sessionStorage.getItem('buyerEmail') || "";
+
+    // Sanitize display name
+    buyerName = buyerName.trim();
+    if (!buyerName || buyerName.toLowerCase() === 'null') buyerName = "Sovereign Reader";
+
+    document.getElementById('welcomeBuyerName').textContent = buyerName;
+    document.getElementById('receiptCustomerName').textContent = buyerName;
+
+    // Generate realistic Order ID & current timestamp
+    const randomOrderId = "ETC-" + Math.floor(100000 + Math.random() * 900000);
+    document.getElementById('receiptOrderId').textContent = randomOrderId;
+
+    const now = new Date();
+    const formattedDate = now.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) + " · " + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+    document.getElementById('receiptDateTime').textContent = formattedDate;
+
+    // WhatsApp Share Link
+    const shareText = encodeURIComponent(`Maine abhi Abhishek Sharma (#AbhishekBuilds) ki groundbreaking eBook "Escape The Crowd" ₹99 mein unlock ki. Bheed se nikalne ka ek practical guide: https://${window.location.host}`);
+    // 2. eBook PDF Download Handler
+    function triggerDownload() {
+      // Safe fallback download
+      const tempLink = document.createElement('a');
+      tempLink.href = 'assets/ebook/Escape_The_Crowd.pdf';
+      tempLink.download = 'Escape_The_Crowd_Abhishek_Sharma.pdf';
+      tempLink.target = '_blank';
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+
+      const statusText = document.getElementById('downloadStatusText');
+      if (statusText) {
+        statusText.innerHTML = `✅ <strong>Aapka Download Ready Hai!</strong> Agar download automatically open nahi hui, toh neeche button dabayein:`;
+      }
+    }
+
+    // Auto-trigger download safely after 1.5 seconds
+    setTimeout(() => {
+      triggerDownload();
+    }, 1500);
+
+    // 3. Lightweight Gold & Emerald Celebration Confetti
+    (function initConfetti() {
+      const canvas = document.getElementById('confettiCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const colors = ['#d4af37', '#f3e5ab', '#22c55e', '#ffffff', '#e6c86e'];
+      const particles = [];
+      const particleCount = 100;
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height - height,
+          size: Math.random() * 8 + 4,
+          speedY: Math.random() * 3 + 2,
+          speedX: Math.random() * 2 - 1,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotationSpeed: Math.random() * 6 - 3
+        });
+      }
+
+      let animationFrame;
+      let animationDuration = 5000; // Run for 5 seconds
+      const startTime = Date.now();
+
+      function updateConfetti() {
+        ctx.clearRect(0, 0, width, height);
+
+        particles.forEach(p => {
+          p.y += p.speedY;
+          p.x += p.speedX;
+          p.rotation += p.rotationSpeed;
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          ctx.restore();
+
+          if (p.y > height) {
+            p.y = -10;
+            p.x = Math.random() * width;
+          }
+        });
+
+        if (Date.now() - startTime < animationDuration) {
+          animationFrame = requestAnimationFrame(updateConfetti);
+        } else {
+          ctx.clearRect(0, 0, width, height);
+        }
+      }
+
+      updateConfetti();
+    })();
+  </script>
+</body>
+</html>

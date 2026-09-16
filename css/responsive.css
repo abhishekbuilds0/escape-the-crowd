@@ -1,0 +1,181 @@
+/* ==========================================================================
+   Escape The Crowd - Responsive Styles
+   ========================================================================== */
+
+/* Tablets & Smaller Laptops (Max 1024px) */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+    text-align: center;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-cta-group {
+    justify-content: center;
+  }
+
+  .hero-trust-bar {
+    justify-content: center;
+  }
+
+  .author-card {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+    padding: 2.2rem;
+  }
+
+  .author-contact-row {
+    justify-content: center;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Mobile Devices (Max 768px) */
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+
+  .navbar-inner {
+    padding: 0 0.5rem;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100vh;
+    background: #0d0d12;
+    border-left: 1px solid var(--gold-border);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5rem 2rem 2rem 2rem;
+    gap: 1.5rem;
+    transition: right var(--transition-normal);
+    z-index: 950;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+  }
+
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-link {
+    font-size: 1.1rem;
+  }
+
+  .nav-cta-group .btn-primary {
+    display: none; /* Keep header clean on mobile, shown in hero */
+  }
+
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-card {
+    padding: 1.8rem;
+  }
+
+  .chapters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quotes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-box {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .pricing-amount {
+    font-size: 3.2rem;
+  }
+
+  .modal-box {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .reader-page {
+    padding: 1.8rem 1.2rem;
+  }
+
+  .toast-container {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  .toast-item {
+    max-width: 100%;
+  }
+
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .book-3d-wrap {
+    width: 270px;
+    height: 410px;
+    transform: rotateY(-12deg) rotateX(6deg);
+  }
+
+  .book-title-main {
+    font-size: 1.55rem;
+  }
+
+  .book-author-portrait-wrap {
+    width: 85px;
+    height: 85px;
+  }
+}
+
+/* Small Phones (Max 480px) */
+@media (max-width: 480px) {
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+
+  .hero-trust-bar {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .hero-price-box {
+    width: 100%;
+    justify-content: center;
+  }
+}
