@@ -425,9 +425,14 @@
     document.getElementById('welcomeBuyerName').textContent = buyerName;
     document.getElementById('receiptCustomerName').textContent = buyerName;
 
-    // Generate realistic Order ID & current timestamp
-    const randomOrderId = "ETC-" + Math.floor(100000 + Math.random() * 900000);
-    document.getElementById('receiptOrderId').textContent = randomOrderId;
+    // Extract payment ID from Razorpay if available
+    const paymentId = urlParams.get('payment_id') || sessionStorage.getItem('paymentId');
+    if (paymentId) {
+      document.getElementById('receiptOrderId').textContent = paymentId;
+    } else {
+      const randomOrderId = "ETC-" + Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('receiptOrderId').textContent = randomOrderId;
+    }
 
     const now = new Date();
     const formattedDate = now.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) + " · " + now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });

@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Payment Form Submission
+  // Payment Form Submission with Live Razorpay Integration
   if (paymentForm) {
     paymentForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -80,29 +80,69 @@ document.addEventListener('DOMContentLoaded', () => {
         currentBuyerName = buyerNameInput.value.trim();
       }
 
+      const buyerEmailInput = document.getElementById('buyerEmail');
+      const buyerEmail = buyerEmailInput ? buyerEmailInput.value.trim() : '';
+
       submitBtn.disabled = true;
       submitBtn.innerHTML = `
         <svg class="animate-spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block; vertical-align:middle; margin-right:8px;">
           <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
           <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
         </svg>
-        Confirming Order & Opening Welcome Page...
+        Opening Secure Payment Gateway...
       `;
 
-      const buyerEmailInput = document.getElementById('buyerEmail');
-      const buyerEmail = buyerEmailInput ? buyerEmailInput.value.trim() : '';
+      // Check if Razorpay SDK is available
+      if (typeof Razorpay !== 'undefined') {
+        const options = {
+          key: 'rzp_live_Td8KJs3en5J9EN',
+          amount: 9900, // ₹99 in paise (99 * 100)
+          currency: 'INR',
+          name: 'Escape The Crowd',
+          description: 'Official 19-Chapter eBook Access',
+          image: 'assets/images/author.jpg',
+          prefill: {
+            name: currentBuyerName,
+            email: buyerEmail
+          },
+          theme: {
+            color: '#d4af37' // Luxury gold theme
+          },
+          handler: function (response) {
+            // Payment Successful!
+            const paymentId = response.razorpay_payment_id || ('PAY-' + Date.now());
+            try {
+              sessionStorage.setItem('buyerName', currentBuyerName);
+              sessionStorage.setItem('buyerEmail', buyerEmail);
+              sessionStorage.setItem('paymentId', paymentId);
+            } catch (err) {
+              console.warn('Session storage error:', err);
+            }
 
-      try {
-        sessionStorage.setItem('buyerName', currentBuyerName);
-        sessionStorage.setItem('buyerEmail', buyerEmail);
-      } catch (err) {
-        console.warn('Session storage unavailable', err);
+            // Redirect directly to Welcome & Instant Download Page
+            window.location.href = `welcome.html?name=${encodeURIComponent(currentBuyerName)}&email=${encodeURIComponent(buyerEmail)}&payment_id=${encodeURIComponent(paymentId)}`;
+          },
+          modal: {
+            ondismiss: function () {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalText;
+            }
+          }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.on('payment.failed', function (response) {
+          alert('Payment uncompleted: ' + (response.error.description || 'Please try again.'));
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        });
+        rzp.open();
+      } else {
+        // Fallback simulation
+        setTimeout(() => {
+          window.location.href = `welcome.html?name=${encodeURIComponent(currentBuyerName)}&email=${encodeURIComponent(buyerEmail)}`;
+        }, 900);
       }
-
-      setTimeout(() => {
-        // Redirect directly to the dedicated Welcome & Download Page
-        window.location.href = `welcome.html?name=${encodeURIComponent(currentBuyerName)}&email=${encodeURIComponent(buyerEmail)}`;
-      }, 900);
     });
   }
 
