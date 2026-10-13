@@ -1,5 +1,5 @@
 /**
- * Escape The Crowd - ₹99 Checkout & Instant Access Modal
+ * Escape The Crowd - ₹49 Checkout & Instant Access Modal
  * Supports UPI Intent, WhatsApp Direct Order, Simulated Gateway & Instant PDF Delivery
  */
 
@@ -94,54 +94,72 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Check if Razorpay SDK is available
       if (typeof Razorpay !== 'undefined') {
-        const options = {
-          key: 'rzp_live_Td8KJs3en5J9EN',
-          amount: 9900, // ₹99 in paise (99 * 100)
-          currency: 'INR',
-          name: 'Escape The Crowd',
-          description: 'Official 19-Chapter eBook Access',
-          image: 'assets/images/author.jpg',
-          prefill: {
-            name: currentBuyerName,
-            email: buyerEmail
-          },
-          theme: {
-            color: '#d4af37' // Luxury gold theme
-          },
-          handler: function (response) {
-            // Payment Successful!
-            const paymentId = response.razorpay_payment_id || ('PAY-' + Date.now());
-            try {
-              sessionStorage.setItem('buyerName', currentBuyerName);
-              sessionStorage.setItem('buyerEmail', buyerEmail);
-              sessionStorage.setItem('paymentId', paymentId);
-            } catch (err) {
-              console.warn('Session storage error:', err);
-            }
+        try {
+          const authorImgUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/') + 'assets/images/author.jpg';
 
-            // Redirect directly to Welcome & Instant Download Page
-            window.location.href = `welcome.html?name=${encodeURIComponent(currentBuyerName)}&email=${encodeURIComponent(buyerEmail)}&payment_id=${encodeURIComponent(paymentId)}`;
-          },
-          modal: {
-            ondismiss: function () {
+          const options = {
+            key: 'rzp_live_Td8KJs3en5J9EN',
+            amount: 4900, // ₹49 in paise (49 * 100)
+            currency: 'INR',
+            name: 'Escape The Crowd',
+            description: 'Official 19-Chapter eBook Access',
+            image: authorImgUrl,
+            prefill: {
+              name: currentBuyerName,
+              email: buyerEmail
+            },
+            theme: {
+              color: '#d4af37' // Luxury gold theme
+            },
+            handler: function (response) {
+              // Payment Successful!
+              const paymentId = response.razorpay_payment_id || ('PAY-' + Date.now());
+              try {
+                sessionStorage.setItem('buyerName', currentBuyerName);
+                sessionStorage.setItem('buyerEmail', buyerEmail);
+                sessionStorage.setItem('paymentId', paymentId);
+              } catch (err) {
+                console.warn('Session storage error:', err);
+              }
+
+              // Redirect directly to Welcome & Instant Download Page
+              window.location.href = `welcome.html?name=${encodeURIComponent(currentBuyerName)}&email=${encodeURIComponent(buyerEmail)}&payment_id=${encodeURIComponent(paymentId)}`;
+            },
+            modal: {
+              ondismiss: function () {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+              }
+            }
+          };
+
+          const rzp = new Razorpay(options);
+          rzp.on('payment.failed', function (response) {
+            alert('Payment failed: ' + (response.error.description || 'Kripya dubara koshish karein.'));
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+          });
+
+          rzp.open();
+
+          // Safety reset in case browser blocks popups
+          setTimeout(() => {
+            if (submitBtn.disabled) {
               submitBtn.disabled = false;
               submitBtn.innerHTML = originalText;
             }
-          }
-        };
+          }, 7000);
 
-        const rzp = new Razorpay(options);
-        rzp.on('payment.failed', function (response) {
-          alert('Payment uncompleted: ' + (response.error.description || 'Please try again.'));
+        } catch (err) {
+          console.error('Razorpay initialization error:', err);
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalText;
-        });
-        rzp.open();
+          alert('Payment gateway open hone mein issue aaya: ' + err.message);
       } else {
-        // Fallback simulation
-        setTimeout(() => {
-          window.location.href = `welcome.html?name=${encodeURIComponent(currentBuyerName)}&email=${encodeURIComponent(buyerEmail)}`;
-        }, 900);
+        // Razorpay failed to load - DO NOT give free download!
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        alert('Payment gateway connect nahi ho paya. Kripya page refresh karke dubara try karein, ya neeche diye gaye WhatsApp button se ₹49 pay karein.');
       }
     });
   }
