@@ -1263,5 +1263,131 @@
   <script src="js/checkout-modal.js"></script>
   <script src="js/toast-notifications.js"></script>
   <script src="js/dynamic-features.js"></script>
+
+  <!-- Bulletproof Self-Contained Checkout & ₹49 Razorpay Script -->
+  <script>
+  (function() {
+    function initCheckout() {
+      const modal = document.getElementById('checkoutModal');
+      const closeBtn = document.getElementById('closeCheckout');
+      const paymentForm = document.getElementById('checkoutForm');
+      const buyerNameInput = document.getElementById('buyerName');
+      const buyerEmailInput = document.getElementById('buyerEmail');
+
+      function openModal(e) {
+        if (e) e.preventDefault();
+        if (modal) {
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          const s1 = document.getElementById('checkoutStep1');
+          const s2 = document.getElementById('checkoutStepSuccess');
+          if (s1 && s2) { s1.style.display = 'block'; s2.style.display = 'none'; }
+        }
+      }
+
+      function closeModal() {
+        if (modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      }
+
+      // Attach open modal listener to ALL buy buttons
+      document.querySelectorAll('.js-open-checkout').forEach(function(btn) {
+        btn.onclick = openModal;
+      });
+
+      if (closeBtn) closeBtn.onclick = closeModal;
+
+      if (modal) {
+        modal.onclick = function(e) {
+          if (e.target === modal) closeModal();
+        };
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+      });
+
+      // Razorpay Payment Handler (₹49)
+      if (paymentForm) {
+        paymentForm.onsubmit = function(e) {
+          e.preventDefault();
+          const submitBtn = paymentForm.querySelector('button[type="submit"]');
+          const originalText = submitBtn ? submitBtn.innerHTML : 'Pay ₹49 & Get Instant Download 🚀';
+
+          const currentBuyerName = (buyerNameInput && buyerNameInput.value.trim()) ? buyerNameInput.value.trim() : 'Reader';
+          const buyerEmail = buyerEmailInput ? buyerEmailInput.value.trim() : '';
+
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Opening Secure Payment Gateway...';
+          }
+
+          if (typeof Razorpay !== 'undefined') {
+            try {
+              const options = {
+                key: 'rzp_live_Td8KJs3en5J9EN',
+                amount: 4900, // ₹49 in paise (49 * 100)
+                currency: 'INR',
+                name: 'Escape The Crowd',
+                description: 'Official 19-Chapter eBook Access',
+                prefill: {
+                  name: currentBuyerName,
+                  email: buyerEmail
+                },
+                theme: { color: '#d4af37' },
+                handler: function(response) {
+                  const paymentId = response.razorpay_payment_id || ('PAY-' + Date.now());
+                  try {
+                    sessionStorage.setItem('buyerName', currentBuyerName);
+                    sessionStorage.setItem('buyerEmail', buyerEmail);
+                    sessionStorage.setItem('paymentId', paymentId);
+                  } catch (err) {}
+                  window.location.href = 'welcome.html?name=' + encodeURIComponent(currentBuyerName) + '&email=' + encodeURIComponent(buyerEmail) + '&payment_id=' + encodeURIComponent(paymentId);
+                },
+                modal: {
+                  ondismiss: function() {
+                    if (submitBtn) {
+                      submitBtn.disabled = false;
+                      submitBtn.innerHTML = originalText;
+                    }
+                  }
+                }
+              };
+              const rzp = new Razorpay(options);
+              rzp.on('payment.failed', function(resp) {
+                alert('Payment failed: ' + (resp.error.description || 'Kripya dubara koshish karein.'));
+                if (submitBtn) {
+                  submitBtn.disabled = false;
+                  submitBtn.innerHTML = originalText;
+                }
+              });
+              rzp.open();
+            } catch (err) {
+              alert('Payment error: ' + err.message);
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+              }
+            }
+          } else {
+            alert('Razorpay payment gateway load ho raha hai... Kripya 2 second ruk kar dubara click karein.');
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalText;
+            }
+          }
+        };
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCheckout);
+    } else {
+      initCheckout();
+    }
+  })();
+  </script>
 </body>
 </html>
